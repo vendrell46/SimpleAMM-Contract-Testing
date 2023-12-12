@@ -28,7 +28,7 @@ contract SimpleAMM {
         uint256 indexed tokenBToReceive
     );
 
-    function addLiquidity(uint256 tokenAAmount, uint256 tokenBAmount) external {
+    function addLiquidity(uint256 tokenAAmount, uint256 tokenBAmount) public {
         require(
             tokenAAmount > 0 && tokenBAmount > 0,
             "Cannot add zero liquidity"
@@ -42,7 +42,7 @@ contract SimpleAMM {
     function removeLiquidity(
         uint256 tokenAAmount,
         uint256 tokenBAmount
-    ) external {
+    ) public {
         require(
             reserveTokenA >= tokenAAmount && reserveTokenB >= tokenBAmount,
             "Insufficient liquidity"
@@ -64,7 +64,7 @@ contract SimpleAMM {
         emit LiquidityRemoved(msg.sender, tokenAAmount, tokenBAmount);
     }
 
-    function swapTokenAForTokenB(uint256 tokenAAmount) external {
+    function swapTokenAForTokenB(uint256 tokenAAmount) public {
         uint256 tokenBAmount = getSwapAmount(tokenAAmount);
         emit TokensToSwap(tokenAAmount, tokenBAmount);
 

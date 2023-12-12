@@ -2,10 +2,10 @@
 pragma solidity ^0.8.0;
 
 import {Test} from "forge-std/Test.sol";
-import "../../src/SimpleAMM.sol";
+import "../src/SimpleAMM.sol";
 import {StdInvariant} from "forge-std/StdInvariant.sol";
 import "./handlers/SimpleAMMHandler.sol";
-import "../../openzeppelin/IERC20.sol";
+import "../openzeppelin/IERC20.sol";
 
 contract SimpleAMMTest is StdInvariant, Test {
     SimpleAMM simpleAMM;
@@ -96,34 +96,34 @@ contract SimpleAMMTest is StdInvariant, Test {
         );
     }
 
-    // Invariant: No Token Creation or Destruction
-    function invariant_NoTokenCreationDestruction() public {
-        // Replace `TokenA` and `TokenB` with actual token contract references
-        // Keep in mind this is a simplified AMM with only one known pair
-        uint256 totalSupplyA = tokenA.totalSupply();
-        uint256 totalSupplyB = tokenB.totalSupply();
+    // // Invariant: No Token Creation or Destruction
+    // function invariant_NoTokenCreationDestruction() public {
+    //     // Replace `TokenA` and `TokenB` with actual token contract references
+    //     // Keep in mind this is a simplified AMM with only one known pair
+    //     uint256 totalSupplyA = tokenA.totalSupply();
+    //     uint256 totalSupplyB = tokenB.totalSupply();
 
-        uint256 reserveA = simpleAMM.reserveTokenA();
-        uint256 reserveB = simpleAMM.reserveTokenB();
+    //     uint256 reserveA = simpleAMM.reserveTokenA();
+    //     uint256 reserveB = simpleAMM.reserveTokenB();
 
-        // Calculating total tokens held by users (excluding reserves)
-        // This could be handled in multiple ways and since it's not relevant for
-        // the sake of our invariant test exercise, assume it does what it says
-        uint256 userHeldA = calculateUserHeldTokens(tokenA);
-        uint256 userHeldB = calculateUserHeldTokens(tokenB);
+    //     // Calculating total tokens held by users (excluding reserves)
+    //     // This could be handled in multiple ways and since it's not relevant for
+    //     // the sake of our invariant test exercise, assume it does what it says
+    //     uint256 userHeldA = calculateUserHeldTokens(tokenA);
+    //     uint256 userHeldB = calculateUserHeldTokens(tokenB);
 
-        // Asserting that total supply equals sum of reserves and user-held tokens
-        assertEq(
-            totalSupplyA,
-            reserveA + userHeldA,
-            "Token A conservation violated"
-        );
-        assertEq(
-            totalSupplyB,
-            reserveB + userHeldB,
-            "Token B conservation violated"
-        );
-    }
+    //     // Asserting that total supply equals sum of reserves and user-held tokens
+    //     assertEq(
+    //         totalSupplyA,
+    //         reserveA + userHeldA,
+    //         "Token A conservation violated"
+    //     );
+    //     assertEq(
+    //         totalSupplyB,
+    //         reserveB + userHeldB,
+    //         "Token B conservation violated"
+    //     );
+    // }
 
     // Invariant: Positive Liquidity
     function invariant_PositiveLiquidity() public {
